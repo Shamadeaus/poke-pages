@@ -15,11 +15,16 @@
     "react-router": "5.1.2",
     "react-scripts": "3.3.1"
   },
+  "homepage": "http://shamadeaus.github.io/poke-pages",
+  "devDependencies": {
+    "gh-pages": "2.2.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
