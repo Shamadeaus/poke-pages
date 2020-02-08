@@ -1,17 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import GitHubIcon from '../resources/GitHubIcon'
 import { makeStyles } from '@material-ui/core/styles'
 import logo from '../resources/titleimg.png'
 import FlexSpacer from '../shared/FlexSpacer'
+import OverflowMenu from '../shared/OverflowMenu'
+import ThemeContext from '../theme/ThemeContext'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
-      marginRight: theme.spacing(2),
+        padding: '6px'
     },
     logo: {
       margin: '8px 0',
@@ -21,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 function ApplicationBar() {
     const classes = useStyles()
+    const {toggleTheme} = useContext(ThemeContext)
 
     return (
         <AppBar color="primary" position="static">
@@ -33,6 +36,11 @@ function ApplicationBar() {
                 <IconButton className={classes.menuButton} color="inherit" href="https://github.com/Shamadeaus/poke-pages">
                     <GitHubIcon/>
                 </IconButton>
+                <OverflowMenu>
+                    <MenuItem onClick={toggleTheme}>
+                        Dusk Theme
+                    </MenuItem>
+                </OverflowMenu>
             </Toolbar>
         </AppBar>
     )

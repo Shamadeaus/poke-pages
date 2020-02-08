@@ -1,15 +1,15 @@
-import React from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import lightTheme from '../theme/lightTheme';
-import ApplicationBar from '../layout/ApplicationBar';
-import './app.css'
+import React from 'react'
+import ApplicationBar from '../layout/ApplicationBar'
+import ThemeProvider from '../theme/ThemeProvider'
+import BodyStyles from '../app/BodyStyles'
 
 function App() {
-  return (
-    <ThemeProvider theme={lightTheme}>
-      <ApplicationBar/>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider>
+            <BodyStyles/>
+            <ApplicationBar/>
+        </ThemeProvider>
+    )
 }
 
 export default App;
