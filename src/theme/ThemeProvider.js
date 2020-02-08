@@ -9,7 +9,7 @@ function ThemeProvider({children}) {
 
     const toggleTheme = useCallback(() => {
         setTheme(current => current === 'light' ? 'dark' : 'light')
-        localStorage.setItem('theme', theme == 'light' ? 'dark' : 'light')
+        localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light')
     }, [theme])
 
     const currentTheme = useMemo(() => theme === 'light' ? lightTheme : darkTheme, [theme])
