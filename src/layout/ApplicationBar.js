@@ -17,6 +17,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import routes from '../routing/routes'
 import { useHistory } from 'react-router-dom'
+import navLogo from '../resources/nav-logo.png'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -24,10 +26,16 @@ const useStyles = makeStyles(theme => ({
     },
     logo: {
       margin: '8px 0',
-      height: '48px'
+      height: '48px',
+      cursor: 'pointer'
     },
     list: {
-        width: 250
+        width: 255
+    },
+    navLogo: {
+        height: 200,
+        width: 140,
+        cursor: 'pointer'
     }
 }))
 
@@ -48,19 +56,24 @@ function ApplicationBar() {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer}>
                         <MenuIcon/>
                     </IconButton>
-                    <img className={classes.logo} src={logo} alt="Log"/>
+                    <img onClick={() => history.push('/')} className={classes.logo} src={logo} alt="logo"/>
                     <FlexSpacer/>
                     <IconButton className={classes.menuButton} color="inherit" href="https://github.com/Shamadeaus/poke-pages">
                         <GitHubIcon/>
                     </IconButton>
                     <OverflowMenu>
                         <MenuItem onClick={toggleTheme}>
-                            {theme === 'dark' ? 'Poke ball Theme' : 'Dusk ball Theme'}
+                            {theme === 'dark' ? 'Poke Ball Theme' : 'Dusk Ball Theme'}
                         </MenuItem>
                     </OverflowMenu>
                 </Toolbar>
             </AppBar>
             <Drawer open={drawerOpen} onClose={toggleDrawer}>
+                <img onClick={() => {
+                    history.push('/')
+                    toggleDrawer()
+                }} className={classes.navLogo} src={navLogo} alt="nav-logo" />
+                <Divider/>
                 <List className={classes.list}>
                     {
                         routes.map((route, key) => {
