@@ -16,6 +16,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import routes from '../routing/routes'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -34,6 +35,7 @@ function ApplicationBar() {
     const classes = useStyles()
     const {toggleTheme, theme} = useContext(ThemeContext)
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const history = useHistory()
 
     const toggleDrawer = useCallback(() => {
         setDrawerOpen(current => !current)
@@ -63,7 +65,10 @@ function ApplicationBar() {
                     {
                         routes.map((route, key) => {
                             return (
-                                <ListItem key={key} href={route.path}>
+                                <ListItem button key={key} onClick={() => {
+                                    history.push(route.path)
+                                    toggleDrawer()
+                                }}>
                                     <ListItemIcon>
                                         {route.icon}
                                     </ListItemIcon>

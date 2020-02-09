@@ -7,7 +7,7 @@ export const homeRoute = {
 }
 
 const pokemonLookupRoute = {
-    path: '/#/lookup',
+    path: '/lookup',
     component: <div>Lookup</div>,
     icon: <Search/>,
     text: 'Pokemon'
