@@ -17,8 +17,8 @@ function OverflowMenu({className, children, color = 'inherit'}) {
     const menuItems = useMemo(() => {
         return React.Children.map(children, child => {
             const onClick = () => {
-                child.props.onClick()
                 handleClose()
+                child.props.onClick()
             }
             return React.cloneElement(child, {onClick})
         })

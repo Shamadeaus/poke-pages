@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useCallback, useState} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -10,6 +10,12 @@ import FlexSpacer from '../shared/FlexSpacer'
 import OverflowMenu from '../shared/OverflowMenu'
 import ThemeContext from '../theme/ThemeContext'
 import MenuItem from '@material-ui/core/MenuItem'
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import routes from '../routing/routes'
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -19,30 +25,56 @@ const useStyles = makeStyles(theme => ({
       margin: '8px 0',
       height: '48px'
     },
-  }))
+    list: {
+        width: 250
+    }
+}))
 
 function ApplicationBar() {
     const classes = useStyles()
-    const {toggleTheme} = useContext(ThemeContext)
+    const {toggleTheme, theme} = useContext(ThemeContext)
+    const [drawerOpen, setDrawerOpen] = useState(false)
+
+    const toggleDrawer = useCallback(() => {
+        setDrawerOpen(current => !current)
+    }, [])
 
     return (
-        <AppBar color="primary" position="static">
-            <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon/>
-                </IconButton>
-                <img className={classes.logo} src={logo} alt="Log"/>
-                <FlexSpacer/>
-                <IconButton className={classes.menuButton} color="inherit" href="https://github.com/Shamadeaus/poke-pages">
-                    <GitHubIcon/>
-                </IconButton>
-                <OverflowMenu>
-                    <MenuItem onClick={toggleTheme}>
-                        Dusk Theme
-                    </MenuItem>
-                </OverflowMenu>
-            </Toolbar>
-        </AppBar>
+        <>
+            <AppBar color="primary" position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer}>
+                        <MenuIcon/>
+                    </IconButton>
+                    <img className={classes.logo} src={logo} alt="Log"/>
+                    <FlexSpacer/>
+                    <IconButton className={classes.menuButton} color="inherit" href="https://github.com/Shamadeaus/poke-pages">
+                        <GitHubIcon/>
+                    </IconButton>
+                    <OverflowMenu>
+                        <MenuItem onClick={toggleTheme}>
+                            {theme === 'dark' ? 'Poke ball Theme' : 'Dusk ball Theme'}
+                        </MenuItem>
+                    </OverflowMenu>
+                </Toolbar>
+            </AppBar>
+            <Drawer open={drawerOpen} onClose={toggleDrawer}>
+                <List className={classes.list}>
+                    {
+                        routes.map((route, key) => {
+                            return (
+                                <ListItem key={key} href={route.path}>
+                                    <ListItemIcon>
+                                        {route.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={route.text}/>
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
+            </Drawer>
+        </>
     )
 }
 
