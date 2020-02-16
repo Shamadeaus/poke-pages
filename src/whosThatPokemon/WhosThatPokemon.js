@@ -27,8 +27,6 @@ function WhosThatPokemon() {
         return `https://raw.githubusercontent.com/Shamadeaus/poke-sprites/master/typeSprites/${type}.gif`
     }
 
-    console.log(pokemon)
-
     return (
         <StandardCard>
             <Autocomplete
