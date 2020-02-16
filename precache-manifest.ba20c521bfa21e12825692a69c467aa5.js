@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b0b71b81b8d665d2d7aa8eb2d9725312",
+    "revision": "169f2b1ed2a32b69b639cf322b29c3ea",
     "url": "/poke-pages/index.html"
   },
   {
-    "revision": "225cdcb49fdd549eb5c2",
-    "url": "/poke-pages/static/js/2.2279b05e.chunk.js"
+    "revision": "5ce54847e774a27757b5",
+    "url": "/poke-pages/static/js/2.b186dda4.chunk.js"
   },
   {
-    "revision": "6f5f1c4a5f7f6e382b8aeca1b4ac8d96",
-    "url": "/poke-pages/static/js/2.2279b05e.chunk.js.LICENSE.txt"
+    "revision": "5d88fa79734dd7ea88fbef0b090463b0",
+    "url": "/poke-pages/static/js/2.b186dda4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3f9a046472f330d0cc47",
-    "url": "/poke-pages/static/js/main.ed7a93d5.chunk.js"
+    "revision": "c72b8d58d93ecf68a9a3",
+    "url": "/poke-pages/static/js/main.23e0bb03.chunk.js"
   },
   {
     "revision": "d0e6cf2d38a49c2f5959",
