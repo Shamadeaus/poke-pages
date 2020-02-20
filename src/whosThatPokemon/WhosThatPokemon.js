@@ -7,13 +7,18 @@ import axios from 'axios'
 import calculateTypeEffectiveness from '../helpers/calculateTypeEffectiveness'
 import Typography from '@material-ui/core/Typography'
 import _ from 'lodash'
+import gen8 from '../resources/gen-8-data.json'
 
 function WhosThatPokemon() {
     const [sprite, setSprite] = useState(null)
     const [pokemon, setPokemon] = useState({types: []})
 
     const handleGetPokemon = useCallback(async (event, value) => {
-        if (value) {
+        if (value?.dexNumber > 809) {
+            console.log(gen8[value.dexNumber])
+            setPokemon(gen8[value.dexNumber])
+            setSprite(`https://raw.githubusercontent.com/Shamadeaus/poke-sprites/master/defaultSprites/${_.padStart(value.dexNumber, 3, 0)}.png`)
+        } else if (value) {
             const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.dexNumber}`)
             setPokemon(data)
             setSprite(`https://raw.githubusercontent.com/Shamadeaus/poke-sprites/master/defaultSprites/${_.padStart(value.dexNumber, 3, 0)}.png`)
