@@ -5,9 +5,6 @@ const calculateTypeEffectiveness = (type1, type2) => {
     const type1Chart = typeChart[type1]
     const type2Chart = typeChart[type2]
 
-    console.log(type1Chart, type1)
-    console.log(type2Chart, type2)
-
     if (type2) {
         return _.reduce(type1Chart, (newChart, effectiveness, type) => {
             const updatedType = type2Chart[type] * effectiveness

@@ -1,18 +1,11 @@
 import React from 'react'
 import Search from '@material-ui/icons/Search'
-import WhosThatPokemon from '../whosThatPokemon/WhosThatPokemon'
 import PokemonList from '../pokemonList/PokemonList'
+import PokemonDetails from '../pokemonDetails/PokemonDetails'
 
 export const homeRoute = {
     path: '/',
-    component: <WhosThatPokemon/>
-}
-
-const whoIsThatPokemon = {
-    path: '/whosThatPokemon',
-    component: <WhosThatPokemon/>,
-    icon: <Search/>,
-    text: "Who's that Pokemon!?"
+    component: <PokemonList/>
 }
 
 const pokemonList = {
@@ -22,7 +15,12 @@ const pokemonList = {
     text: "List"
 }
 
+const pokemonDetails = {
+    path: '/pokemonDetails/:id',
+    component: <PokemonDetails/>
+}
+
 export default [
-    whoIsThatPokemon,
-    pokemonList
+    pokemonList,
+    pokemonDetails
 ]

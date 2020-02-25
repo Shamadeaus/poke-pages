@@ -15,7 +15,6 @@ function WhosThatPokemon() {
 
     const handleGetPokemon = useCallback(async (event, value) => {
         if (value?.dexNumber > 809) {
-            console.log(gen8[value.dexNumber])
             setPokemon(gen8[value.dexNumber])
             setSprite(`https://raw.githubusercontent.com/Shamadeaus/poke-sprites/master/defaultSprites/${_.padStart(value.dexNumber, 3, 0)}.png`)
         } else if (value) {

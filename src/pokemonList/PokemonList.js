@@ -12,8 +12,15 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import axios from 'axios'
 import _ from 'lodash'
+import Link from '@material-ui/core/Link'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import pokemonList from '../resources/pokemon-list.json'
+import { useHistory } from "react-router-dom"
+
 
 function PokemonList() {
+    const history = useHistory()
     const [pokemon, setPokemon] = useState([])
     const headCells = [
         { id: 'pokedexNumber', label: 'Pokedex Number' },
@@ -49,64 +56,77 @@ function PokemonList() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-            <Typography className={classes.title} variant="h6" id="tableTitle">
-                Pokemon
-            </Typography>
-            <TableContainer>
-                <Table
-                    className={classes.table}
-                    aria-labelledby="tableTitle"
-                    size="medium"
-                    aria-label="table"
-                >
-                <TableHead>
-                    <TableRow>
-                        {headCells.map(headCell => (
-                        <TableCell
-                            key={headCell.id}
-                        >
-                            <TableSortLabel>
-                            {headCell.label}
-                            </TableSortLabel>
-                        </TableCell>
-                        ))}
-                    </TableRow>
-                    </TableHead>
-                <TableBody>
-                    {pokemon.map((row) => {   
-                    
-                        return (
-                        <TableRow
-                            hover
-                            tabIndex={-1}
-                            key={row.name}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.url.match(/\d+/g)[1]}
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <Typography className={classes.title} variant="h6" id="tableTitle">
+                        Pokemon
+                    </Typography>
+                    <div style={{flex: 1}}/>
+                    <Autocomplete
+                        freeSolo
+                        options={pokemonList}
+                        onChange={(event, value) => history.push(`/pokemonDetails/${value.dexNumber}`)}
+                        getOptionLabel={option => option.name}
+                        style={{ width: 300 }}
+                        renderInput={params => (
+                            <TextField {...params} label="Search Pokemon" fullWidth />
+                        )}
+                    />
+                </div>
+                <TableContainer>
+                    <Table
+                        className={classes.table}
+                        aria-labelledby="tableTitle"
+                        size="medium"
+                        aria-label="table"
+                    >
+                    <TableHead>
+                        <TableRow>
+                            {headCells.map(headCell => (
+                            <TableCell
+                                key={headCell.id}
+                            >
+                                <TableSortLabel>
+                                {headCell.label}
+                                </TableSortLabel>
                             </TableCell>
-                            <TableCell component="th" scope="row">
-                                {_.startCase(row.name)}
-                            </TableCell>
+                            ))}
                         </TableRow>
-                        );
-                    })}
-                    {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                        <TableCell colSpan={6} />
-                    </TableRow>
-                    )}
-                </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={890}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+                        </TableHead>
+                    <TableBody>
+                        {pokemon.map((row) => {   
+                            const dexNumber = row.url.match(/\d+/g)[1]
+                            return (
+                            <TableRow
+                                hover
+                                tabIndex={-1}
+                                key={row.name}
+                            >
+                                <TableCell component="th" scope="row">
+                                    <Link color="secondary" href={`/#/pokemonDetails/${dexNumber}`}>{dexNumber}</Link>
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                    {_.startCase(row.name)}
+                                </TableCell>
+                            </TableRow>
+                            )
+                        })}
+                        {emptyRows > 0 && (
+                        <TableRow style={{ height: 53 * emptyRows }}>
+                            <TableCell colSpan={6} />
+                        </TableRow>
+                        )}
+                    </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={890}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
             </Paper>
         </div>
       )
@@ -134,6 +154,9 @@ const useStyles = makeStyles(theme => ({
       top: 20,
       width: 1,
     },
-  }));
+    title: {
+        padding: '16px'
+    }
+  }))
 
 export default PokemonList

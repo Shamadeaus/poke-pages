@@ -77,17 +77,20 @@ function ApplicationBar() {
                 <List className={classes.list}>
                     {
                         routes.map((route, key) => {
-                            return (
-                                <ListItem button key={key} onClick={() => {
-                                    history.push(route.path)
-                                    toggleDrawer()
-                                }}>
-                                    <ListItemIcon>
-                                        {route.icon}
-                                    </ListItemIcon>
-                                    <ListItemText primary={route.text}/>
-                                </ListItem>
-                            )
+                            if (route.icon && route.text) {
+                                return (
+                                    <ListItem button key={key} onClick={() => {
+                                        history.push(route.path)
+                                        toggleDrawer()
+                                    }}>
+                                        <ListItemIcon>
+                                            {route.icon}
+                                        </ListItemIcon>
+                                        <ListItemText primary={route.text}/>
+                                    </ListItem>
+                                )
+                            }
+                            return null
                         })
                     }
                 </List>
