@@ -17,7 +17,10 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import pokemonList from '../resources/pokemon-list.json'
 import { useHistory } from "react-router-dom"
-
+import { Link as RouterLink } from 'react-router-dom';
+const LinkBehavior = React.forwardRef((props, ref) => (
+    <RouterLink ref={ref} {...props} to={props.href} />
+  ))
 
 function PokemonList() {
     const history = useHistory()
@@ -102,7 +105,7 @@ function PokemonList() {
                                 key={row.name}
                             >
                                 <TableCell component="th" scope="row">
-                                    <Link color="secondary" href={`/#/pokemonDetails/${dexNumber}`}>{dexNumber}</Link>
+                                    <Link component={LinkBehavior} color="secondary" href={`/pokemonDetails/${dexNumber}`}>{dexNumber}</Link>
                                 </TableCell>
                                 <TableCell component="th" scope="row">
                                     {_.startCase(row.name)}
